@@ -29,7 +29,7 @@ async def video_menu(message: Message, state: FSMContext, db):
 
     # 🔥 MANA SEN SO‘RAGAN JOY
     videos = await db.fetch(
-        "SELECT file_id FROM user_videos WHERE user_id=$1 ORDER BY created_at",
+        "SELECT id, file_id FROM user_videos WHERE user_id=$1 ORDER BY created_at",
         user_id
     )
 
@@ -37,12 +37,11 @@ async def video_menu(message: Message, state: FSMContext, db):
         [InlineKeyboardButton(text="➕ Video qo‘shish", callback_data="add_video")]
     ]
 
-    # 🔥 Raqamlash 1 dan boshlanadi
     for index, video in enumerate(videos, start=1):
         buttons.append(
             [InlineKeyboardButton(
                 text=f"🎬 Video {index}",
-                callback_data=f"video_{index}"
+                callback_data=f"watch_{video['id']}"
             )]
         )
 
