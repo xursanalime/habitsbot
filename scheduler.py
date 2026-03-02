@@ -93,18 +93,14 @@ async def send_daily_report(bot, db):
             print(f"Report error for user {user_id}: {e}")
             continue
 
-
-
-
 async def send_prayer_reminders(bot, db):
 
-    now = datetime.now().strftime("%H:%M")
+    now = datetime.now(ZoneInfo("Asia/Tashkent")).strftime("%H:%M")
 
     users = await db.fetch("""
-        SELECT user_id, fajr, dhuhr, asr, maghrib, isha
-        FROM prayer_times
-    """)
-
+            SELECT user_id, fajr, dhuhr, asr, maghrib, isha
+            FROM prayer_times
+        """)
     for user in users:
 
         prayers = {
