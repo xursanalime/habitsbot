@@ -20,8 +20,8 @@ def start_scheduler(bot, db):
     scheduler.add_job(
         send_daily_report,
         trigger="cron",
-        hour=8,
-        minute=30,
+        hour=23,
+        minute=0,
         args=[bot, db]
     )
     scheduler.add_job(
